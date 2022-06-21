@@ -115,9 +115,7 @@ hostnamectl set-hostname ${HOSTNAME_LONG}
 
 if [ ! "${SLACK_WEBHOOK}" = "" ]; then
 	SLACK_MESSAGE="[*${HOSTNAME_SHORT}*] Building instance ID *${INSTANCE_ID}* (${AVAILABILITY_ZONE})"
-	SLACK_MESSAGE="${SLACK_MESSAGE}\nHost: ${HOSTNAME_LONG}, local IPv4: ${PRIVATE_IP_ADDRESS}"
-	if [ ! "${PUBLIC_IP_ADDRESS}" = "" ]; then SLACK_MESSAGE="${SLACK_MESSAGE}, public IPv4: ${PUBLIC_IP_ADDRESS}" ; fi
-
+	SLACK_MESSAGE="${SLACK_MESSAGE}\nHost: *${HOSTNAME_LONG}*, local IPv4: *${PRIVATE_IP_ADDRESS}*, public IPv4: *${PUBLIC_IP_ADDRESS}*"
 	curl --silent --fail --request POST --header 'Content-type: application/json' --data "{\"text\":\"${SLACK_MESSAGE}\"}" ${SLACK_WEBHOOK} > /dev/null
 fi
 
